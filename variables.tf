@@ -35,7 +35,7 @@ variable "DNS01_IP" {
 
 variable "DNS02_IP" {
   type    = string
-  default = "10.0.2.100"
+  default = "10.0.3.100"
 }
 
 variable "LIST_KNOWN_PORT" {
@@ -67,10 +67,10 @@ variable "tags" {
 }
 
 variable "Disk_Size" {
-  type = map(string)
+  type = map(number)
   default = {
-    WEB = "20"
-    DB  = "30"
+    WEB = 40
+    DB  = 30
   }
 }
 
