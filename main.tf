@@ -38,7 +38,7 @@ resource "azurerm_subnet" "ZONE1_01" {
   name                 = "ZONE1_O1"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNET01.name
-  address_prefixes     = [var.ZONE1["01"]]
+  address_prefixes     = [var.ZONE1.01]
 
 }
 
@@ -46,7 +46,7 @@ resource "azurerm_subnet" "ZONE2_01" {
   name                 = "ZONE2_O1"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.VNET01.name
-  address_prefixes     = [var.ZONE2["01"]]
+  address_prefixes     = [var.ZONE2.01]
 }
 
 resource "azurerm_network_interface" "WEB_NIC01" {
@@ -85,10 +85,10 @@ resource "azurerm_network_security_rule" "Allow_WEB_Traffic" {
   network_security_group_name = azurerm_network_security_group.Allow_WEB.name
   source_address_prefix       = "*"
   source_port_range           = "*"
-  destination_address_prefix  = var.ZONE1["01"]
+  destination_address_prefix  = var.ZONE1.01
   destination_port_ranges = [
-    var.LIST_KNOWN_PORT["HTTP"],
-    var.LIST_KNOWN_PORT["HTTPS"]
+    var.LIST_KNOWN_PORT.HTTP,
+    var.LIST_KNOWN_PORT.HTTPS
   ]
   protocol            = "Tcp"
   direction           = "Inbound"
@@ -102,8 +102,8 @@ resource "azurerm_network_security_rule" "Allow_SSH_Traffic" {
   network_security_group_name = azurerm_network_security_group.Allow_WEB.name
   source_address_prefix       = "*"
   source_port_range           = "*"
-  destination_address_prefix  = var.ZONE1["01"]
-  destination_port_range      = var.LIST_KNOWN_PORT["SSH"]
+  destination_address_prefix  = var.ZONE1.01
+  destination_port_range      = var.LIST_KNOWN_PORT.SSH
   protocol                    = "Tcp"
   direction                   = "Inbound"
   access                      = "Allow"
@@ -120,9 +120,10 @@ resource "azurerm_network_security_group" "Allow_DNS" {
     source_address_prefix      = "*"
     source_port_range          = "*"
     destination_address_prefix = "*"
-    destination_port_ranges    = [var.LIST_KNOWN_PORT["DNS"], var.LIST_KNOWN_PORT["SSH"]]
+    destination_port_ranges    = [var.LIST_KNOWN_PORT.DNS, var.LIST_KNOWN_PORT.SSH]
     protocol                   = "Tcp"
     direction                  = "Inbound"
+    access                     = "Allow"
   }
 }
 

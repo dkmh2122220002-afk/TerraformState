@@ -15,16 +15,16 @@ variable "ZONE1" {
 variable "ZONE2" {
   type = map(string)
   default = {
-    03 = "10.0.3.0/24"
-    04 = "10.0.4.0/24"
+    01 = "10.0.3.0/24"
+    02 = "10.0.4.0/24"
   }
 }
 
 variable "SUBNET_AppGW" {
   type = map(string)
   default = {
-    03 = "10.0.250.0/24"
-    04 = "10.0.251.0/24"
+    01 = "10.0.250.0/24"
+    02 = "10.0.251.0/24"
   }
 }
 
